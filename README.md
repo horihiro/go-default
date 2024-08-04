@@ -20,10 +20,17 @@ Options:
 
 See [sample](./sample/.vscode/tasks.json#L17)
 
-## Background
+## Background and motivation
 The value of `default` property of the each element of `inputs` in tasks.json is fixed.
 
-Many developers want to remenber the value from user input, then some similar issues were filed and closed without 
+Many developers want to remenber the value from user input, then some similar issues were filed and closed.
+
+  - https://github.com/microsoft/vscode/issues/65066
+  - https://github.com/microsoft/vscode/issues/78213
+  - https://github.com/microsoft/vscode/issues/78422
+  - https://github.com/microsoft/vscode/issues/72944
+
+This tool might be an approach of the solution for these issues. 
 
 ## Limitation
 
