@@ -38,8 +38,8 @@ func Mapping(f func(string) DefaultValue, array []string) []DefaultValue {
 
 func main() {
 	var args struct {
-		TargetFile    string   `arg:"-t,--target-file,required"`
-		DefaultValues []string `arg:"-v,--default-value,separate,required"`
+		TargetFile    string   `arg:"-t,--target-file,required" help:"file path of target 'tasks.json' "`
+		DefaultValues []string `arg:"-v,--default-value,separate,required" help:"id and default values to update, the format is '${ID}:${DEFAULT_VALUE}'"`
 	}
 	arg.MustParse(&args)
 
