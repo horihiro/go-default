@@ -12,9 +12,9 @@
       "label": "echo",
       "command": [
         // main part of this task
-        "echo 'Input values are ${input:test} and ${input:test2}'",
+        "echo 'Input values are ${input:test}, ${input:test2} and ${input:test3}'",
         // optional part to update the tasks.json file with the input values by this tool
-        "&& go run ../tasksjson-updater.go -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json -v test=${input:test} -v test2=${input:test2}",
+        "&& go run ../tasksjson-updater.go -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json -v test=${input:test} -v test2=${input:test2} -v test3=${input:test3}",
       ],
       "dependsOn": [
         // highly recommended to backup the tasks.json file before updating it
@@ -26,15 +26,26 @@
   "inputs": [
     {
       "id": "test",
-      "default": "5678",
+      "default": "",
       "description": "Enter the test name",
       "type": "promptString"
     },
     {
-      "default": "efgh",
+      "default": "",
       "description": "Enter the test name",
       "id": "test2",
       "type": "promptString",
+    },
+    {
+      "id": "test3",
+      "default": "",
+      "description": "Select value from the list",
+      "type": "pickString",
+      "options": [
+        "mnop",
+        "qrst",
+        "uvwx"
+      ]
     }
   ]
 }
