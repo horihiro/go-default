@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "backup tasks.json",
+      "command": "cp ${workspaceFolder}/.vscode/tasks.json ${workspaceFolder}/.vscode/tasks.json.bak",
+      "problemMatcher": [],
+    },
+    {
+      "type": "shell",
+      "label": "echo",
+      "command": [
+        // main part of this task
+        "echo 'Input values are ${input:test} and ${input:test2}'",
+        // optional part to update the tasks.json file with the input values by this tool
+        "&& go run ../tasksjson-updater.go -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json -v test=${input:test} -v test2=${input:test2}",
+      ],
+      "dependsOn": [
+        // highly recommended to backup the tasks.json file before updating it
+        "backup tasks.json"
+      ],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "test",
+      "default": "5678",
+      "description": "Enter the test name",
+      "type": "promptString"
+    },
+    {
+      "default": "efgh",
+      "description": "Enter the test name",
+      "id": "test2",
+      "type": "promptString",
+    }
+  ]
+}
