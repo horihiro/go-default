@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"log"
 	"os"
-	"strings"
 	"text/template"
 
 	"github.com/alexflint/go-arg"
@@ -28,31 +27,23 @@ func Reduce(f func(string, DefaultValue) (string, error), a string, array []Defa
 	return a, nil
 }
 
-func Mapping(f func(string) DefaultValue, array []string) []DefaultValue {
-	buff := make([]DefaultValue, len(array))
-	for i, v := range array {
-		buff[i] = f(v)
-	}
-	return buff
-}
-
 func main() {
 	var args struct {
-		TargetFile    string   `arg:"-t,--target-file,required" help:"file path of target 'tasks.json' "`
-		DefaultValues []string `arg:"-v,--default-value,separate,required" help:"id and default values to update, the format is '${ID}:${DEFAULT_VALUE}'"`
+		TargetFile    string            `arg:"-t,--target-file,required" help:"file path of target 'tasks.json'" placeholder:"/PATH/TO/tasks.json"`
+		DefaultValues map[string]string `arg:"-s,--set,required" help:"pairs of id and default values to update" placeholder:"id1=value1 id2=value2 ..."`
 	}
 	arg.MustParse(&args)
+
+	defaultValues := make([]DefaultValue, 0, len(args.DefaultValues))
+	for k, v := range args.DefaultValues {
+		defaultValues = append(defaultValues, DefaultValue{Id: k, Value: v})
+	}
 
 	filePath := args.TargetFile
 	file, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	defaultValues := Mapping(func(s string) DefaultValue {
-		strs := strings.Split(s, "=")
-		return DefaultValue{Id: strs[0], Value: strs[1]}
-	}, args.DefaultValues)
 
 	var buf bytes.Buffer
 	buf.WriteString("(?<=\"id\"\\s*:\\s*\"{{.}}\",?\\s*(?:\"(?:[a-z]+)\"\\s*:\\s*(?:\"[^\"]+\"|\\{[^}]+\\}|\\[[^\\]]+\\]),?\\s*)*\"default\"\\s*:\\s*\")[^\"]*(?=\".*)")
@@ -87,10 +78,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// 2. バイト文字列に変換
 	d := []byte(m)
-
-	// 3. 書き込み
 	err = os.WriteFile(filePath, d, 0644)
 	if err != nil {
 		log.Fatal(err)

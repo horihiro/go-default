@@ -8,13 +8,13 @@ https://github.com/user-attachments/assets/e1f316e0-3817-4cca-a24c-cf57211a9a01
 ## Usage
 
 ```
-Usage: tasksjson-updater --target-file TARGET-FILE --default-value DEFAULT-VALUE
+Usage: tasksjson-updater --target-file /PATH/TO/tasks.json --set id1=value1 id2=value2 ...
 
 Options:
   --target-file TARGET-FILE, -t TARGET-FILE
                          file path of target 'tasks.json' 
-  --default-value DEFAULT-VALUE, -v DEFAULT-VALUE
-                         id and default values to update, the format of 'DEFAULT-VALUE' is '${ID}=${DEFAULT_VALUE}'
+  --set ID-AND-VALUE, -s IDx=VALUEx
+                         pairs of id and default values to update
   --help, -h             display this help and exit
 ```
 
