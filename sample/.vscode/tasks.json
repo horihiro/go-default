@@ -14,7 +14,9 @@
         // main part of this task
         "echo 'Input values are ${input:test}, ${input:test2} and ${input:test3}'",
         // optional part to update the tasks.json file with the input values by this tool
-        "&& go run ../tasksjson-updater.go -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json -s test=${input:test} test2=${input:test2} test3=${input:test3}",
+        "&& go run ..${pathSeparator}default.go", // or `/PATH/TO/default`
+        " -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json",
+        " -s test=${input:test} test2=${input:test2} test3=${input:test3}",
       ],
       "dependsOn": [
         // highly recommended to backup the tasks.json file before updating it

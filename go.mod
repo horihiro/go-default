@@ -1,4 +1,4 @@
-module github.com/qdm12/horihiro/tasksjson-updater
+module github.com/qdm12/horihiro/go-default
 
 go 1.22.5
 

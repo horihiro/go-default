@@ -1,4 +1,4 @@
-# tasksjson-updater
+# go-default
 
 CLI tool for update default values of each input in `.vscode/tasks.json`.
 
@@ -8,12 +8,12 @@ https://github.com/user-attachments/assets/e1f316e0-3817-4cca-a24c-cf57211a9a01
 ## Usage
 
 ```
-Usage: tasksjson-updater --target-file /PATH/TO/tasks.json --set id1=value1 id2=value2 ...
+Usage: default --target-file /PATH/TO/tasks.json --set id1=value1 id2=value2 ...
 
 Options:
-  --target-file TARGET-FILE, -t TARGET-FILE
-                         file path of target 'tasks.json' 
-  --set ID-AND-VALUE, -s IDx=VALUEx
+  --target-file /PATH/TO/tasks.json, -t /PATH/TO/tasks.json
+                         file path of target 'tasks.json'
+  --set id1=value1 id2=value2 ..., -s id1=value1 id2=value2 ...
                          pairs of id and default values to update
   --help, -h             display this help and exit
 ```
@@ -34,7 +34,7 @@ This tool might be an approach of the solution for these issues.
 
 ## Limitation
 
-Currently, this tool only update the value of `default` property of the element of `inputs`.  
+Currently, this tool only UPDATE the value of `default` property of the element of `inputs`.  
 This means this tool doesn't create the `default` property when the element doesn't have the property as following.
 
 ```json
