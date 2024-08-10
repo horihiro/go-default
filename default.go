@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"os"
+	"path/filepath"
 	"text/template"
 
 	"github.com/alexflint/go-arg"
@@ -29,8 +30,9 @@ func Reduce(f func(string, DefaultValue) (string, error), a string, array []Defa
 
 func main() {
 	var args struct {
-		TargetFile    string            `arg:"-t,--target-file,required" help:"file path of target 'tasks.json'" placeholder:"/PATH/TO/tasks.json"`
-		DefaultValues map[string]string `arg:"-s,--set,required" help:"pairs of id and default values to update" placeholder:"id1=value1 id2=value2 ..."`
+		TargetFolder    string            `arg:"-t,--target-folder,required" help:"target path of folder containing '.vscode/tasks.json'" placeholder:"/PATH/TO/PROJECT/FOLDER"`
+		DefaultValues   map[string]string `arg:"-s,--set,required" help:"pairs of id and default values to update" placeholder:"id1=value1 ... idN=valueN"`
+		BackupTasksJson string            `arg:"-b,--backup-file" help:"path of backup file of '.vscode/tasks.json'" placeholder:"/PATH/TO/tasks.json.bak"`
 	}
 	arg.MustParse(&args)
 
@@ -38,13 +40,18 @@ func main() {
 	for k, v := range args.DefaultValues {
 		defaultValues = append(defaultValues, DefaultValue{Id: k, Value: v})
 	}
-
-	filePath := args.TargetFile
+	filePath := filepath.Join(args.TargetFolder, ".vscode", "tasks.json")
 	file, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	backupPath := args.BackupTasksJson
+	if backupPath != "" {
+		os.WriteFile(backupPath, file, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 	var buf bytes.Buffer
 	buf.WriteString("(?<=\"id\"\\s*:\\s*\"{{.}}\",?\\s*(?:\"(?:[a-z]+)\"\\s*:\\s*(?:\"[^\"]+\"|\\{[^}]+\\}|\\[[^\\]]+\\]),?\\s*)*\"default\"\\s*:\\s*\")[^\"]*(?=\".*)")
 	buf.WriteString("|")

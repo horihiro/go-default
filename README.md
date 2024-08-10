@@ -8,14 +8,15 @@ https://github.com/user-attachments/assets/e1f316e0-3817-4cca-a24c-cf57211a9a01
 ## Usage
 
 ```
-Usage: default --target-file /PATH/TO/tasks.json --set id1=value1 id2=value2 ...
+Usage: default --target-folder /PATH/TO/PROJECT/FOLDER --set id1=value1 ... idN=valueN [--backup-file /PATH/TO/tasks.json.bak]
 
 Options:
-  --target-file /PATH/TO/tasks.json, -t /PATH/TO/tasks.json
-                         file path of target 'tasks.json'
-  --set id1=value1 id2=value2 ..., -s id1=value1 id2=value2 ...
+  --target-folder /PATH/TO/PROJECT/FOLDER, -t /PATH/TO/PROJECT/FOLDER
+                         target path of folder containing '.vscode/tasks.json'
+  --set id1=value1 ... idN=valueN, -s id1=value1 ... idN=valueN
                          pairs of id and default values to update
-  --help, -h             display this help and exit
+  --backup-file /PATH/TO/tasks.json.bak, -b /PATH/TO/tasks.json.bak
+                         path of backup file of '.vscode/tasks.json'
 ```
 
 See [sample](./sample/.vscode/tasks.json#L17)
