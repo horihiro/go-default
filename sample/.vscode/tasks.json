@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "label": "echo",
+      "label": "test task",
       "command": [
         // main part of this task
         "echo 'Input values are ${input:promptTest1}, ${input:promptTest2} and ${input:pickTest1}'",
@@ -21,19 +21,19 @@
   "inputs": [
     {
       "id": "promptTest1",
-      "default": "",
+      "default": "abc",
       "description": "Enter the 1st value",
       "type": "promptString"
     },
     {
-      "default": "",
+      "default": "def",
       "description": "Enter the 2nd value",
       "id": "promptTest2",
       "type": "promptString",
     },
     {
       "id": "pickTest1",
-      "default": "",
+      "default": "Europe",
       "description": "Select the 3rd value from the list",
       "type": "pickString",
       "options": [

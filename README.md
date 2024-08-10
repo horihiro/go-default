@@ -3,7 +3,7 @@
 CLI tool for update default values of each input in `.vscode/tasks.json`.
 
 ## Demo
-https://github.com/user-attachments/assets/e1f316e0-3817-4cca-a24c-cf57211a9a01
+https://github.com/user-attachments/assets/ac3f25ea-6aee-465d-9d2c-8eb7ce69f806
 
 ## Usage
 
