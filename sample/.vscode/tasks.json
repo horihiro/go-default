@@ -3,31 +3,24 @@
   "tasks": [
     {
       "type": "shell",
-      "label": "backup tasks.json",
-      "command": "cp ${workspaceFolder}/.vscode/tasks.json ${workspaceFolder}/.vscode/tasks.json.bak",
-      "problemMatcher": [],
-    },
-    {
-      "type": "shell",
       "label": "echo",
       "command": [
         // main part of this task
-        "echo 'Input values are ${input:test}, ${input:test2} and ${input:test3}'",
-        // optional part to update the tasks.json file with the input values by this tool
-        "&& go run ..${pathSeparator}default.go", // or `/PATH/TO/default`
-        " -t ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json",
-        " -s test=${input:test} test2=${input:test2} test3=${input:test3}",
-      ],
-      "dependsOn": [
-        // highly recommended to backup the tasks.json file before updating it
-        "backup tasks.json"
+        "echo 'Input values are ${input:promptTest1}, ${input:promptTest2} and ${input:pickTest1}'",
+        // tasks.json updating part
+        "&& go run ..${pathSeparator}default.go",
+        " -t ${workspaceFolder}",                                                     // the target folder
+        " -s promptTest1=${input:promptTest1}",
+           " promptTest2=${input:promptTest2}",
+           " pickTest1=${input:pickTest1}",                                           // the input values to update
+        " -b ${workspaceFolder}${pathSeparator}.vscode${pathSeparator}tasks.json.bk"  // the backup file (optional)
       ],
       "problemMatcher": []
     }
   ],
   "inputs": [
     {
-      "id": "test",
+      "id": "promptTest1",
       "default": "",
       "description": "Enter the 1st value",
       "type": "promptString"
@@ -35,18 +28,18 @@
     {
       "default": "",
       "description": "Enter the 2nd value",
-      "id": "test2",
+      "id": "promptTest2",
       "type": "promptString",
     },
     {
-      "id": "test3",
+      "id": "pickTest1",
       "default": "",
       "description": "Select the 3rd value from the list",
       "type": "pickString",
       "options": [
-        "Alpha",
-        "Beta",
-        "Gamma"
+        "Asia",
+        "America",
+        "Europe"
       ]
     }
   ]
