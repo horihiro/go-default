@@ -1,8 +1,9 @@
 # Sample
 
 ## Default behavior of VSCode task inputs 
-https://github.com/user-attachments/assets/7d466135-aa18-4205-ace5-7f96cad1008c
+https://github.com/user-attachments/assets/79f76645-0ce4-4325-966a-8325ca26b937
+
 
 ## Combination VSCode task inputs and this tool 
-https://github.com/user-attachments/assets/2e53afed-28cb-475c-ae41-fa1c84a2a473
+https://github.com/user-attachments/assets/95602623-6f1c-424c-a43a-befe7eb098ab
 
