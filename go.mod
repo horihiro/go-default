@@ -1,4 +1,4 @@
-module github.com/qdm12/horihiro/go-default
+module github.com/horihiro/go-default
 
 go 1.22.5
 
