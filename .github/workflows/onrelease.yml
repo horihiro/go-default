@@ -13,7 +13,7 @@ jobs:
             arch: amd64
             ext:
           - os: windows
-            arch: arm64
+            arch: amd64
             ext: .exe
           - os: darwin
             arch: arm64
